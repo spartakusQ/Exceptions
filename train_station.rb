@@ -8,7 +8,6 @@ class TrainStation
     @trains = []
     @@station_name << self
     register_instance
-    puts "Создана станция #{station_name}"
   end
 
   def add_train(train)

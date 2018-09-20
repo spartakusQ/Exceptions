@@ -28,26 +28,23 @@ loop do
   input = gets.to_i
 
 case input
-  when 1  #1.Создание станции.
+  when 1
       puts 'C каким названием?'
       name = gets.chomp
       stations << TrainStation.new(name)
-      puts "Построена станция #{name}"
-  when 2  #2.Создание поезда.
+  when 2
     puts 'Поезд с каким номером хотите создать?'
     puts '1 - пассажирский; 2 - грузовой'
     number = gets.chomp.to_i
       case number
         when 1
           trains << PassengerTrain.new(number)
-          puts "Создан пассажирский поезд №#{number}"
         when 2
           trains << CargoTrain.new(number)
-          puts "Создан грузовой поезд №#{number}"
         else
           puts "Поезд не создан. Надо было ввести 1 или 2"
       end
-  when 3  #3.Создание маршрута и управление станциями.
+  when 3
     if stations.empty?
       puts 'Сначала необходимо создать станцию'
     elsif trains.empty?
@@ -61,7 +58,7 @@ case input
          puts 'Станция есть в списке.'
       end
     end
-  when 4#  4.Назначение маршрут поезду.
+  when 4
     if trains.empty?
       puts 'Сначала необходимо создать поезд'
     elsif stations.empty?
@@ -83,8 +80,7 @@ case input
         end
       end
     end
-  when 5#  5.Добавление выгона к поезду.
-    ########################################проверить else условия
+  when 5
     if trains.empty?
       puts 'Сначала необходимо создать поезд'
     else
@@ -97,8 +93,7 @@ case input
         train.add_carriage(CARRIAGE_TYPES[train.type])
       end
     end
-    ########################################
-  when 6#  6.Отцепить вагон от поезда.
+  when 6
     if trains.empty?
       puts 'Сначала необходимо создать поезд'
     else
@@ -113,7 +108,7 @@ case input
         train.remove_carriage(train.carriages.last)
       end
     end
-  when 7#  7.Перемещать поезд по маршруту вперёд и назад.
+  when 7
     puts 'Выберите в каком направлении хотите отправить поезд.'
     puts '1 - вперёд; 2 - назад.'
       trace = gets.chomp.to_i
@@ -127,7 +122,7 @@ case input
         selected_train.move_next
         puts "Поезд #{train.number} прибыл на станцию #{@train.current_station.name}"
       end
-  when 8#  8.Просматривать список станций и список поездов на станции.
+  when 8
     puts 'Список станций:'
       stations.each{|station| puts station.name}
     if stations.empty?
@@ -142,7 +137,7 @@ case input
         station.show_trains
       end
     end
-  when 0#  0.Выход из меню.
+  when 0
     puts 'Счастливого пути!'
     exit
   end

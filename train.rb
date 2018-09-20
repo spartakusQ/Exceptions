@@ -1,3 +1,6 @@
+require_relative 'instance_counter'
+require_relative 'company_name'
+
 class Train
   include InstanceCounter
   include CompanyName
@@ -9,7 +12,6 @@ class Train
     @speed = 0
     @@trains[number] = self
     register_instance
-    puts "Создан поезд с номером #{number}. Количество вагонов: #{@carriage}."
   end
 
   def stop
@@ -32,7 +34,6 @@ class Train
   def add_carriage
     if speed.zero?
       self.carriage += 1
-      puts "К поезду с номером #{number} прицепили вагон. Теперь их #{carriage}."
     else
       puts "Для прицепки вагонов, поезд должен стоять."
     end
@@ -42,8 +43,7 @@ class Train
     if carriage.zero?
       puts "Вагонов уже не осталось."
     elsif speed.zero?
-      self.carriage -= 1
-      puts "От поезда с номером #{number} отцепили вагон. Теперь их #{carriage}."
+      self.carriage -= 1      
     else
       puts "На ходу нельзя отцеплять вагоны!"
     end
