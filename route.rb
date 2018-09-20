@@ -1,9 +1,11 @@
 class Route
+
+  include Validate
   attr_reader :stations, :from, :to
 
   def initialize(from, to)
     @stations = [from, to]
-    puts "Создан маршрут следования #{from.station_name} - #{to.station_name}"
+    validate!
   end
 
   def add_station(station)
@@ -23,5 +25,11 @@ class Route
   def show_stations
     puts "В маршрутный лист #{stations.first.station_name} - #{stations.last.station_name} входят станции с именами: "
     stations.each{|station| puts " #{station.station_name}" }
+  end
+
+  protected
+
+  def validate!
+    raise 'Станция не была выбрана.' if @stations.first.nil? && @stations.last.nil?
   end
 end

@@ -2,14 +2,18 @@ require_relative 'instance_counter'
 require_relative 'company_name'
 
 class Train
+  include Validate
   include InstanceCounter
   include CompanyName
   attr_accessor :number, :route, :station
+
+  VALID_NUMBER = /^[a-z\d]{3}-?[a-z\d]{2}$/i
 
   def initialize(number)
     @number = number
     @carriage = []
     @speed = 0
+    validate!
     @@trains[number] = self
     register_instance
   end
@@ -43,7 +47,7 @@ class Train
     if carriage.zero?
       puts "Вагонов уже не осталось."
     elsif speed.zero?
-      self.carriage -= 1      
+      self.carriage -= 1
     else
       puts "На ходу нельзя отцеплять вагоны!"
     end
@@ -82,4 +86,12 @@ class Train
   def self.find(number)
     @@trains[number]
   end
+
+  protected
+
+  def validate!
+    raise 'Номер поезда неправильного формата' if number.to_s !~ VALID_NUMBER
+  end
+
+
 end

@@ -1,11 +1,13 @@
 class TrainStation
   include InstanceCounter
+  include Validate
   attr_reader :station_name, :trains
   @@station_name = []
 
   def initialize(station_name)
     @station_name = station_name
     @trains = []
+    validate!
     @@station_name << self
     register_instance
   end
@@ -34,5 +36,12 @@ class TrainStation
 
   def self.all_station
     @@station_name
+  end
+
+  protected
+
+  def validate!
+    raise 'Название станции должно быть больше 3 символов' if name.length < 3
+    raise 'Станция с таким именем уже существует!' if find
   end
 end
