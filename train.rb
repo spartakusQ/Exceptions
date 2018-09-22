@@ -2,7 +2,7 @@ require_relative 'instance_counter'
 require_relative 'company_name'
 
 class Train
-  include Validate
+  include Validation
   include InstanceCounter
   include CompanyName
   attr_accessor :number, :route, :station

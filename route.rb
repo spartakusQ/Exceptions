@@ -1,6 +1,6 @@
 class Route
 
-  include Validate
+  include Validation
   attr_reader :stations, :from, :to
 
   def initialize(from, to)
@@ -30,6 +30,6 @@ class Route
   protected
 
   def validate!
-    raise 'Станция не была выбрана.' if @stations.first.nil? && @stations.last.nil?
+    raise 'Станция не была выбрана.' unless @stations.first && @stations.last
   end
 end
